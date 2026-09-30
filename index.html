@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Koura Music AI</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#050505;color:#f5f5f5;font-family:Inter,system-ui,sans-serif}.top{height:68px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;border-bottom:1px solid #222;position:sticky;top:0;background:#050505ed;backdrop-filter:blur(15px);z-index:5}.brand{font-weight:900;font-size:20px}.brand span{color:#a78bfa}.right{display:flex;gap:8px;align-items:center}.credit,.pay{border-radius:12px;padding:9px 12px}.credit{background:#17131e;border:1px solid #343038}.credit b{color:#c4b5fd}.pay,.gen{border:0;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;font-weight:800}.wrap{width:min(900px,92%);margin:auto}.hero{text-align:center;padding:52px 0 25px}.hero h1{font-size:clamp(40px,8vw,70px);margin:0;letter-spacing:-3px}.hero p{color:#999}.templates{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding-bottom:280px}.card{height:150px;border-radius:21px;padding:17px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#24153a,#171f38);border:1px solid #28252e;cursor:pointer}.card:nth-child(2){background:linear-gradient(135deg,#391522,#332016)}.card:nth-child(3){background:linear-gradient(135deg,#102e35,#172044)}.card:nth-child(4){background:linear-gradient(135deg,#2d1633,#17303b)}.card:nth-child(5){background:linear-gradient(135deg,#362313,#24153c)}.card:nth-child(6){background:linear-gradient(135deg,#142e21,#321633)}.composer{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(900px,100%);background:#171717;border:1px solid #303030;border-bottom:0;border-radius:28px 28px 0 0;padding:13px 17px 18px;z-index:10;box-shadow:0 -20px 70px #000}.handle{width:40px;height:5px;background:#777;border-radius:9px;margin:0 auto 12px}.tag{display:inline-block;background:#292929;border-radius:22px;padding:8px 12px;color:#ddd}.prompt{width:100%;height:80px;background:transparent;border:0;outline:0;resize:none;color:#fff;font-size:18px;padding:13px 7px}.prompt::placeholder{color:#777}.tools{display:flex;gap:8px;flex-wrap:wrap}.tool{background:#202020;border:1px solid #383838;color:#ddd;border-radius:22px;padding:10px 13px}.gen{margin-left:auto;border-radius:22px;padding:10px 16px}.modal{display:none;position:fixed;inset:0;background:#000b;z-index:30;align-items:center;justify-content:center;padding:18px}.box{width:min(520px,100%);background:#171717;border:1px solid #3a3a3a;border-radius:24px;padding:22px;position:relative}.close{position:absolute;right:14px;top:10px;border:0;background:#292929;color:#fff;border-radius:50%;width:32px;height:32px;font-size:20px}.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.packs button,.methods button{background:#202020;border:1px solid #3b3b3b;color:#eee;border-radius:13px;padding:12px}.packs button.active,.methods button.active{border-color:#a78bfa;background:#281c3c}.methods{display:grid;gap:8px;margin-top:10px}.notice{color:#999;font-size:13px}.result{display:none;position:fixed;inset:0;background:#050505;z-index:20;padding:25px;overflow:auto}.resultin{width:min(700px,100%);margin:30px auto}.cover{height:300px;border-radius:25px;background:linear-gradient(135deg,#30134b,#771e59);display:grid;place-items:center;font-size:70px;margin:22px 0}.download{display:flex;gap:8px}.download a,.back{flex:1;text-align:center;padding:12px;border-radius:12px;border:1px solid #333;background:#171717;color:#fff;text-decoration:none}.status{color:#aaa}.loading{display:none;margin:12px 0;color:#c4b5fd}@media(max-width:600px){.templates{grid-template-columns:1fr 1fr}.packs{grid-template-columns:1fr}.gen{width:100%;margin-left:0}.top{padding:0 10px}.brand{font-size:17px}}
+</style>
+<meta name="theme-color" content="#050505"><meta name="robots" content="index,follow"></head>
+<body>
+<header class="top"><div class="brand">KOURA <span>MUSIC AI</span></div><div class="right"><button class="pay" onclick="openPay()">💳 Acheter</button><div class="credit">⚡ <b id="credits">20</b></div></div></header>
+<main class="wrap">
+<section class="hero"><h1>Crée ta musique.</h1><p>Décris ton morceau, choisis le genre, la voix et la vidéo.</p></section>
+<section class="templates">
+<div class="card" onclick="fill('Une chanson Afrobeats énergique, moderne, avec un refrain mémorable.')"><b>Afrobeat</b></div>
+<div class="card" onclick="fill('Une chanson R&B romantique et douce, avec un refrain émotionnel.')"><b>Love song</b></div>
+<div class="card" onclick="fill('Un morceau rap/drill sombre et énergique, avec un refrain puissant.')"><b>Rap / Drill</b></div>
+<div class="card" onclick="fill('Une chanson festive africaine qui donne envie de danser.')"><b>Festif</b></div>
+<div class="card" onclick="fill('Une musique cinématique épique pour accompagner une vidéo.')"><b>Cinématique</b></div>
+<div class="card" onclick="fill('Une chanson motivante sur la réussite et la persévérance.')"><b>Motivation</b></div>
+</section>
+</main>
+<section class="composer"><div class="handle"></div><span class="tag">🎵 Musique</span><textarea id="prompt" class="prompt" placeholder="Décris ton morceau..."></textarea>
+<div class="tools">
+<select id="genre" class="tool"><option>Afrobeats</option><option>R&B</option><option>Rap</option><option>Drill</option><option>Reggae</option><option>Dancehall</option><option>Acoustic</option><option>Cinematic</option></select>
+<select id="length" class="tool"><option>Short</option><option selected>Standard</option><option>Long</option></select>
+<select id="vocals" class="tool"><option>Vocals on</option><option>Instrumental</option><option>Custom</option></select>
+<select id="language" class="tool"><option>Français</option><option>Français + Pulaar</option><option>Français + English</option></select>
+<button class="tool" onclick="document.getElementById('video').checked=!document.getElementById('video').checked">🎬 Vidéo</button><input id="video" type="checkbox" checked hidden>
+<button class="gen" onclick="generate()">✨ Générer • 10 crédits</button>
+</div><div id="loading" class="loading">⏳ Génération en cours…</div></section>
+
+<div id="payModal" class="modal"><div class="box"><button class="close" onclick="closePay()">×</button><h2>💳 Acheter des crédits</h2><p class="notice">Choisis un pack et un moyen de paiement.</p>
+<div class="packs"><button onclick="pack(100,this)">100<br>crédits</button><button onclick="pack(300,this)">300<br>crédits</button><button onclick="pack(1000,this)">1 000<br>crédits</button></div>
+<p id="packText">Pack sélectionné : 100 crédits</p><div class="methods"><button onclick="method('Orange Money',this)">🟠 Orange Money</button><button onclick="method('Visa / Mastercard',this)">💳 Visa / Mastercard</button><button onclick="method('MTN MoMo',this)">📱 MTN MoMo</button></div>
+<button class="gen" style="width:100%;margin-top:15px" onclick="pay()">Continuer</button><p class="notice">Le mode démo ne débite aucun argent. En production, le serveur doit confirmer le paiement avant d'ajouter les crédits.</p></div></div>
+
+<div id="result" class="result"><div class="resultin"><button class="back" onclick="closeResult()">← Retour</button><div class="cover">🎵</div><h2>Ta création</h2><p id="lyrics" class="status"></p><audio id="audio" controls style="width:100%;margin:15px 0"></audio><video id="vid" controls style="width:100%;display:none;border-radius:15px"></video><div class="download"><a id="audioLink" href="#" download>⬇ Télécharger MP3</a><a id="videoLink" href="#" download style="display:none">🎬 Télécharger vidéo</a></div></div></div>
+
+<script>
+const userId='demo-user';let selectedPack=100,selectedMethod='';const $=id=>document.getElementById(id);
+async function refresh(){const r=await fetch('/api/account/'+userId);const d=await r.json();$('credits').textContent=d.credits}refresh();
+function fill(x){$('prompt').value=x;$('prompt').focus()}
+function openPay(){$('payModal').style.display='flex'}function closePay(){$('payModal').style.display='none'}
+function pack(n,b){selectedPack=n;$('packText').textContent='Pack sélectionné : '+n+' crédits';document.querySelectorAll('.packs button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+function method(m,b){selectedMethod=m;document.querySelectorAll('.methods button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+async function pay(){if(!selectedMethod)return alert('Choisis un moyen de paiement.');const r=await fetch('/api/payment/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId,pack:selectedPack,method:selectedMethod})});const d=await r.json();if(d.status==='demo_pending'){if(confirm('Paiement de démonstration. Simuler la confirmation ?')){const q=await fetch('/api/payment/demo-confirm',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paymentId:d.paymentId})});const x=await q.json();$('credits').textContent=x.credits;closePay()}}else alert(d.error||'Erreur')}
+async function generate(){const prompt=$('prompt').value.trim();if(!prompt)return alert('Décris ton morceau.');$('loading').style.display='block';const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId,prompt,genre:$('genre').value,length:$('length').value,vocals:$('vocals').value,language:$('language').value,video:$('video').checked})});const d=await r.json();$('loading').style.display='none';$('credits').textContent=d.credits??$('credits').textContent;if(!r.ok||d.status==='needs_api_key')return alert(d.message||d.error||'Configuration requise');$('result').style.display='block';if(d.audioUrl){$('audio').src=d.audioUrl;$('audioLink').href=d.audioUrl}if(d.videoUrl){$('vid').src=d.videoUrl;$('vid').style.display='block';$('videoLink').href=d.videoUrl;$('videoLink').style.display='block'}$('lyrics').textContent=d.lyrics||'Audio généré.'}
+function closeResult(){$('result').style.display='none'}
+</script>
+</body>
+</html>
